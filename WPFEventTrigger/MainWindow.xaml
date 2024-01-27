@@ -10,13 +10,65 @@
         <Style x:Key="tbStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Height" Value="40"></Setter>
             <Setter Property="Margin" Value="5"></Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="GotFocus">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Duration="0:0:0.2"
+                                Storyboard.TargetProperty="Background.Color"
+                                To="Beige"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="LostFocus">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Duration="0:0:0.2"
+                                Storyboard.TargetProperty="Background.Color"
+                                To="White"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
-
         <Style x:Key ="btnStyle" TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="5"></Setter>
             <Setter Property="Height" Value="100"></Setter>
-            <Setter Property="Width" Value="150"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
             <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="LayoutTransform.(ScaleTransform.ScaleX)"
+                                From="1.0" To="1.3" Duration="0:0:0.2"/>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="LayoutTransform.(ScaleTransform.ScaleY)"
+                                From="1.0" To="1.3" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="LayoutTransform.(ScaleTransform.ScaleX)"
+                                From="1.3" To="1.0" Duration="0:0:0.2"/>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="LayoutTransform.(ScaleTransform.ScaleY)"
+                                From="1.3" To="1.0" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
 
     </Window.Resources>
@@ -35,7 +87,7 @@
         <TextBox Grid.Row="2" Style="{StaticResource tbStyle}"/>
         <TextBox Grid.Row="3" Style="{StaticResource tbStyle}"/>
 
-        <Grid Grid.Row="4" Height="110" VerticalAlignment="Center">
+        <Grid Grid.Row="4" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
